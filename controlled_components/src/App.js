@@ -16,6 +16,10 @@ function App() {
     gender: ''
   })
 
+  const [error, setError] = useState({
+    name: ''
+  })
+
   const onChange = (e) => {
       // const value = e.target.value;
       const {value, name, type, checked} = e.target //same way but with some destructuring
@@ -30,9 +34,25 @@ function App() {
   }
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    showData()
-  }
+    e.preventDefault();
+  
+    if (form.name.length < 6) {
+      setError((state) => ({
+        ...state,
+        name: 'Too short'
+      }));
+      return;
+    } else {
+      setError((state) => ({
+        ...state,
+        name: ''
+      }));
+    }
+  
+    showData();
+  };
+  
+
 
   return (
     <div className="App">
@@ -41,11 +61,15 @@ function App() {
           <label >
             Name:
             <input 
+              // required
+              // minLength={6}
+              // maxLength={12}
               name="name" 
               value={form.name}
               onChange={onChange}
             />
           </label>
+          {!!error.name && (<div><i>{error.name}</i></div>) }
           <hr />
           <label >
             Email:
