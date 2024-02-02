@@ -12,7 +12,8 @@ function App() {
     email: '',
     description: '',
     country: 'Egypt', //default value
-    agree: false
+    agree: false,
+    gender: ''
   })
 
   const onChange = (e) => {
@@ -75,6 +76,16 @@ function App() {
           <label>
             Agree
             <input type="checkbox" name="agree" onChange={onChange} value={form.agree} />
+          </label>
+          <hr />
+          <label>
+            Gender: 
+            <div>
+              <input onClick={onChange} type="radio"  value="Male" name='gender'/>Male
+              <input onClick={onChange} type="radio"  value="Female" name='gender'/> Female
+              <input onClick={onChange} type="radio"  value="Other" name='gender'/>Other
+
+            </div>
           </label>
           <div>
             <button>Submit</button>
