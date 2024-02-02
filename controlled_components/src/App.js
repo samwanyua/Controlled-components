@@ -11,15 +11,16 @@ function App() {
     name: '',
     email: '',
     description: '',
-    country: 'Egypt' //default value
+    country: 'Egypt', //default value
+    agree: false
   })
 
   const onChange = (e) => {
       // const value = e.target.value;
-      const {value, name} = e.target //same way but with some destructuring
+      const {value, name, type, checked} = e.target //same way but with some destructuring
       setForm((state) => ({
         ...state,
-        [name]: value
+        [name]: type === 'checkbox' ? checked : value
       }))
   }
 
@@ -29,6 +30,7 @@ function App() {
 
   const onSubmit = (e) => {
     e.preventDefault()
+    showData()
   }
 
   return (
@@ -69,8 +71,13 @@ function App() {
               <option value="South Africa">South Africa</option>
             </select>
           </label>
+          <hr />
+          <label>
+            Agree
+            <input type="checkbox" name="agree" onChange={onChange} value={form.agree} />
+          </label>
           <div>
-            <button onClick={showData}>Submit</button>
+            <button>Submit</button>
           </div>
           
           
